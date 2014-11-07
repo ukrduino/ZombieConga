@@ -14,6 +14,8 @@
 		A53CD5381A076F8500A77E57 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53CD5371A076F8500A77E57 /* Images.xcassets */; };
 		A53CD53B1A076F8500A77E57 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A53CD5391A076F8500A77E57 /* LaunchScreen.xib */; };
 		A53CD5471A076F8500A77E57 /* ZombieCongaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53CD5461A076F8500A77E57 /* ZombieCongaTests.swift */; };
+		A593AD0B1A0D0B8A00F52AA3 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */; };
+		A593AD0D1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A593AD0C1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf */; };
 		A5BE57C91A07BAD10030F2EA /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C31A07BAD10030F2EA /* background1.png */; };
 		A5BE57CA1A07BAD10030F2EA /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C41A07BAD10030F2EA /* background2.png */; };
 		A5BE57CB1A07BAD10030F2EA /* MainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C51A07BAD10030F2EA /* MainMenu.png */; };
@@ -44,6 +46,8 @@
 		A53CD5401A076F8500A77E57 /* ZombieCongaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZombieCongaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53CD5451A076F8500A77E57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A53CD5461A076F8500A77E57 /* ZombieCongaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCongaTests.swift; sourceTree = "<group>"; };
+		A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
+		A593AD0C1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Линейная алгебра для разработчиков игр _ Хабрахабр.pdf"; sourceTree = "<group>"; };
 		A5BE57C31A07BAD10030F2EA /* background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background1.png; sourceTree = "<group>"; };
 		A5BE57C41A07BAD10030F2EA /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background2.png; sourceTree = "<group>"; };
 		A5BE57C51A07BAD10030F2EA /* MainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainMenu.png; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 				A53CD5371A076F8500A77E57 /* Images.xcassets */,
 				A53CD5391A076F8500A77E57 /* LaunchScreen.xib */,
 				A53CD52A1A076F8500A77E57 /* Supporting Files */,
+				A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */,
 			);
 			path = ZombieConga;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 		A53CD52A1A076F8500A77E57 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A593AD0C1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf */,
 				A53CD52B1A076F8500A77E57 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -224,6 +230,7 @@
 				A5BE57CD1A07BAD10030F2EA /* YouWin.png in Resources */,
 				A5BE57CE1A07BAD10030F2EA /* sprites.atlas in Resources */,
 				A53CD53B1A076F8500A77E57 /* LaunchScreen.xib in Resources */,
+				A593AD0D1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf in Resources */,
 				A5BE57CB1A07BAD10030F2EA /* MainMenu.png in Resources */,
 				A5BE57CC1A07BAD10030F2EA /* YouLose.png in Resources */,
 				A53CD5381A076F8500A77E57 /* Images.xcassets in Resources */,
@@ -250,6 +257,7 @@
 				A53CD5311A076F8500A77E57 /* GameScene.swift in Sources */,
 				A53CD5331A076F8500A77E57 /* GameViewController.swift in Sources */,
 				A53CD52D1A076F8500A77E57 /* AppDelegate.swift in Sources */,
+				A593AD0B1A0D0B8A00F52AA3 /* MyUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
