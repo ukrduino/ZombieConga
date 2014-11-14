@@ -1,14 +1,8 @@
-//
-//  MyUtils.swift
-//  ZombieConga
-//
-//  Created by Romaniuk Sergey on 07.11.14.
-//  Copyright (c) 2014 Romaniuk Sergey. All rights reserved.
-//
+// Playground - noun: a place where people can play
 
-import Foundation
-import CoreGraphics
+import UIKit
 
+var str = "Hello, playground"
 let π = CGFloat(M_PI) // 3.14
 
 
@@ -57,10 +51,10 @@ func /= (inout point: CGPoint, scalar: CGFloat) {
 
 #if !(arch(x86_64) || arch(arm64))
     func atan2(y: CGFloat, x: CGFloat) -> CGFloat {
-        return CGFloat(atan2f(Float(y), Float(x))) }
+    return CGFloat(atan2f(Float(y), Float(x))) }
     
     func sqrt(a: CGFloat) -> CGFloat {
-        return CGFloat(sqrtf(Float(a)))
+    return CGFloat(sqrtf(Float(a)))
     }
 #endif
 
@@ -84,28 +78,56 @@ extension CGPoint {
 func shortestAngleBetween(angle1: CGFloat, angle2: CGFloat) -> CGFloat {
     let twoπ = π * 2.0
     var angle = (angle2 - angle1) % twoπ
-    //в XCODE углы в радианах, 
-    //1 радиан — центральный угол, длина дуги которого равна радиусу окружности см. Circle_radians.gif в Supporting Files. 
-    //Далее преобразования углов: α[рад] — угол в радианах, α[°] — угол в градусах, 
-    //α[°] = α[рад] × (180° / π) или α[рад] × (360° / 2π) 
-    //α[рад] = α[°] : (180° / π) = α[°] × (π / 180°) 
+    //в XCODE углы в радианах,
+    //1 радиан — центральный угол, длина дуги которого равна радиусу окружности см. Circle_radians.gif в Supporting Files.
+    //Далее преобразования углов: α[рад] — угол в радианах, α[°] — угол в градусах,
+    //α[°] = α[рад] × (180° / π) или α[рад] × (360° / 2π)
+    //α[рад] = α[°] : (180° / π) = α[°] × (π / 180°)
     //таким образом, 180° = π радиан, 360° = 2π радиан
     //в тригонометрии обозначение  π  подразумевает не его числовое значение (3,1415926535), а  π * Rad, то есть 180° и т. п.
     //в данной функции angle это остаток от деления разницы углов на 360° (2π)
     
-    if (angle >= π) {
-    angle = angle - twoπ
+    if (angle >= π) { //   >=180
+        angle = angle - twoπ // -360
     }
     //сравниваем остаток от деления(angle) с π (π * Rad, то есть 180°) и если angle >= 180 то от angle отнимаем 360. Например 195 больше чем 180, 195-360= -165
-    if (angle <= -π) {
-    angle = angle + twoπ
+    
+    if (angle <= -π) {  // <= 180
+        angle = angle + twoπ // +360
     }
-    //если остаток <= -180 например -195 то к нему прибавляем 360 = 165
     return angle
-
 }
 
 extension CGFloat {
     func sign() -> CGFloat {
-    return (self >= 0.0) ? 1.0 : -1.0 }
+        return (self >= 0.0) ? 1.0 : -1.0 }
 }
+
+extension CGFloat {
+    func degr() -> CGFloat {
+        return self * (180/CGFloat(M_PI))
+    }
+}
+
+extension CGFloat {
+    func rad() -> CGFloat {
+        return self * (CGFloat(M_PI)/180)
+    }
+}
+
+
+
+let testPoint1 = CGPoint(x: -7, y: -7)
+let testPoint2 = CGPoint(x: -7, y: 1)
+
+var ang1 = testPoint1.angleRad
+
+var ang2 = testPoint2.angleRad
+
+
+var shortestAngle = shortestAngleBetween(ang1, ang2)
+
+var shortestAngleDeg = shortestAngle.degr()
+
+
+

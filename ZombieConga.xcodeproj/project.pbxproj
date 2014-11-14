@@ -22,6 +22,7 @@
 		A5BE57CC1A07BAD10030F2EA /* YouLose.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C61A07BAD10030F2EA /* YouLose.png */; };
 		A5BE57CD1A07BAD10030F2EA /* YouWin.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C71A07BAD10030F2EA /* YouWin.png */; };
 		A5BE57CE1A07BAD10030F2EA /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C81A07BAD10030F2EA /* sprites.atlas */; };
+		A5E248791A1204CB00ED6962 /* Circle_radians.gif in Resources */ = {isa = PBXBuildFile; fileRef = A5E248781A1204CB00ED6962 /* Circle_radians.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		A5BE57C61A07BAD10030F2EA /* YouLose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YouLose.png; sourceTree = "<group>"; };
 		A5BE57C71A07BAD10030F2EA /* YouWin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YouWin.png; sourceTree = "<group>"; };
 		A5BE57C81A07BAD10030F2EA /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = sprites.atlas; sourceTree = "<group>"; };
+		A5CD42A51A14B735001A7450 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
+		A5E248781A1204CB00ED6962 /* Circle_radians.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Circle_radians.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,7 @@
 		A53CD51E1A076F8500A77E57 = {
 			isa = PBXGroup;
 			children = (
+				A5CD42A51A14B735001A7450 /* Playground.playground */,
 				A53CD5291A076F8500A77E57 /* ZombieConga */,
 				A53CD5431A076F8500A77E57 /* ZombieCongaTests */,
 				A53CD5281A076F8500A77E57 /* Products */,
@@ -99,12 +103,12 @@
 				A5BE57C81A07BAD10030F2EA /* sprites.atlas */,
 				A53CD52C1A076F8500A77E57 /* AppDelegate.swift */,
 				A53CD5301A076F8500A77E57 /* GameScene.swift */,
+				A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */,
 				A53CD5321A076F8500A77E57 /* GameViewController.swift */,
 				A53CD5341A076F8500A77E57 /* Main.storyboard */,
 				A53CD5371A076F8500A77E57 /* Images.xcassets */,
 				A53CD5391A076F8500A77E57 /* LaunchScreen.xib */,
 				A53CD52A1A076F8500A77E57 /* Supporting Files */,
-				A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */,
 			);
 			path = ZombieConga;
 			sourceTree = "<group>";
@@ -113,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				A593AD0C1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf */,
+				A5E248781A1204CB00ED6962 /* Circle_radians.gif */,
 				A53CD52B1A076F8500A77E57 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -235,6 +240,7 @@
 				A5BE57CC1A07BAD10030F2EA /* YouLose.png in Resources */,
 				A53CD5381A076F8500A77E57 /* Images.xcassets in Resources */,
 				A5BE57CA1A07BAD10030F2EA /* background2.png in Resources */,
+				A5E248791A1204CB00ED6962 /* Circle_radians.gif in Resources */,
 				A53CD5361A076F8500A77E57 /* Main.storyboard in Resources */,
 				A5BE57C91A07BAD10030F2EA /* background1.png in Resources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+
 class GameScene: SKScene {
 //A scene is the root node of your content. It is used to display SpriteKit content on an SKView.
 //    Called once when the scene is created, do your one-time setup here.
@@ -17,19 +18,22 @@ class GameScene: SKScene {
 // определение констант
     let zombie = SKSpriteNode(imageNamed: "zombie1")
     let zombieMovePointsPerSec: CGFloat = 480.0
+    let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
     let playableRect: CGRect
 
+
 // определение переменных
-    var velocity = CGPointZero
-    var lastUpdateTime: NSTimeInterval = 0
-    var dt: NSTimeInterval = 0
+    var velocity = CGPointZero // вектор скорости (куда должен попасть зомби за секунду)
+    var lastUpdateTime: NSTimeInterval = 0 //последние обновление картинки
+    var dt: NSTimeInterval = 0 // время с последнего обновления картинки в мс
+    var lastTouchLocation = CGPointZero // вектор места последнего касания
 
     override init(size: CGSize) {
-        let maxAspectRatio:CGFloat = 16.0/9.0 // 1
-        let playableHeight = size.width / maxAspectRatio // 2
-        let playableMargin = (size.height-playableHeight)/2.0 // 3 
+        let maxAspectRatio:CGFloat = 16.0/9.0 // максимальное соотношение сторон 1,77
+        let playableHeight = size.width / maxAspectRatio // расчет высоты игровой области
+        let playableMargin = (size.height-playableHeight)/2.0 // слепая зона игры
         
-        playableRect = CGRect(x: 0,
+        playableRect = CGRect(x: 0, // игровая зона гарантированно видимая на всех устройствах
                               y: playableMargin,
                           width: size.width,
                          height: playableHeight) // 4 
@@ -52,69 +56,98 @@ class GameScene: SKScene {
     
 //определение и переопределение  методов
     override func didMoveToView(view: SKView) {
-        let background = SKSpriteNode(imageNamed: "background1")
-        background.zPosition = -1
-        addChild(background)
-        background.position = CGPoint(x: size.width/2, y: size.height/2)
-        background.anchorPoint = CGPointZero
-        background.position = CGPointZero
-        let mySize = background.size
-    println("Size: \(mySize)")
+        let background = SKSpriteNode(imageNamed: "background1") // определение фона
+        background.zPosition = -1 // фон -  самый первый слой
+        addChild(background) // добавлени фона к сцене
+//        background.position = CGPoint(x: size.width/2, y: size.height/2) // установка центра фона в центр экрана
+        background.anchorPoint = CGPointZero // якорь фона нижний левый угол
+        background.position = CGPointZero // совмещение нижнего левого угла фона с нижним левым углом экрана
+        let mySize = background.size // размер фона
+//    println("Size: \(mySize)")
 
-    zombie.position = CGPoint(x: 400, y: 400)
-    //zombie.setScale(2.0) // SKNode method
+    zombie.position = CGPoint(x: 400, y: 400) // установка зомби в начале игры
+    //zombie.setScale(2.0) // SKNode method - масштабирование зомби
         
-    addChild(zombie)
-    debugDrawPlayableArea()
+    addChild(zombie) //добавление зомби к сцене
+    debugDrawPlayableArea() // рисование красного квадрата игровой зоны
     }
     
-    override func update(currentTime: NSTimeInterval){
+    override func update(currentTime: NSTimeInterval){ //функция обновлени кадров в игре
+        
+        //функция для вычисления dt (время с последнего обновления картинки в мс)
+
         if lastUpdateTime > 0 {
             dt = currentTime - lastUpdateTime
-        } else { dt = 0
+        }
+        else {
+            dt = 0
         }
         lastUpdateTime = currentTime
-        println("\(dt*1000) milliseconds since last update")
+      
+        let distanceToStop = (lastTouchLocation-zombie.position).length() //расстояние до остановки зомби
+        if distanceToStop > 0 {
         
-        moveSprite(zombie, velocity: velocity)
-        boundsCheckZombie()
-        rotateSprite(zombie, direction: velocity)
-    }
-    
-    func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) { //принимает параметры (спрайт, скорость)
-            let amountToMove = CGPoint(x: velocity.x * CGFloat(dt),
-                                       y: velocity.y * CGFloat(dt))
+        println("distanceToStop: \(distanceToStop)")
+        }
+        // если растояние до точки остановки зомби меньше растояния которое зомби должен пройти в этом кадре то зомби ставим в точку где он должен остановиться и устанавливаем вектор скорости  = 0
+        if (distanceToStop<=(zombieMovePointsPerSec * CGFloat(dt))){
+            zombie.position = lastTouchLocation
+            velocity = CGPointZero
+        
+        }
+        // если нет то двигаем зомби и вращаем если нужно
+        else {
             
-            println("Amount to move: \(amountToMove)") // 2
-            sprite.position = CGPoint(x: sprite.position.x + amountToMove.x,
-                                      y: sprite.position.y + amountToMove.y) }
-    
-    func moveZombieToward(location: CGPoint) {
-        let offset = CGPoint(x: location.x - zombie.position.x,
-                             y: location.y - zombie.position.y)
-        let length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
-        let direction = CGPoint(x: offset.x / CGFloat(length),
-                                y: offset.y / CGFloat(length))
-        velocity = CGPoint(x: direction.x * zombieMovePointsPerSec,
-                           y: direction.y * zombieMovePointsPerSec)
-    }
-    
-    func sceneTouched(touchLocation:CGPoint) {
-        moveZombieToward(touchLocation)
-    }
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+            moveSprite(zombie, velocity: velocity)
+            rotateSprite(zombie, velocity: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
+        }
         
-        let touch = touches.anyObject() as UITouch
-        let touchLocation = touch.locationInNode(self)
-        sceneTouched(touchLocation)
+        boundsCheckZombie()
     }
-    
+   
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         
         let touch = touches.anyObject() as UITouch
         let touchLocation = touch.locationInNode(self)
         sceneTouched(touchLocation)
+        println("touchesMoved touchLocation: \(touchLocation)")
+    }  
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        
+        let touch = touches.anyObject() as UITouch
+        let touchLocation = touch.locationInNode(self)
+        sceneTouched(touchLocation)
+        println("touchesBegan touchLocation: \(touchLocation)")
     }
+    
+    func sceneTouched(touchLocation:CGPoint) {
+        moveZombieToward(touchLocation)
+        lastTouchLocation = touchLocation
+    }
+    
+   
+    func moveZombieToward(location: CGPoint) {
+        
+        let offset = location - zombie.position // вектор растояния между ветором положения зомби и вектором координат прикосновения
+        println("offset: \(offset)")
+        
+        let direction = offset.normalized() // вектор направления - нормализованный ветор расстояния
+
+        velocity = direction * zombieMovePointsPerSec //обновленный ветор скорости т.е. зомби идет на расстояние zombieMovePointsPerSec (за одну секунду) в напралении direction
+        println("velocity: \(velocity)")
+    }    
+    
+    func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) { //принимает параметры (спрайт, вектор скорости)
+        
+        // в этом кадре зомби пройдет расстояние которое он должен пройти за секунду умноженное на долю секунды с момента обновления кадра.
+        let pointsToMoveInFrame = velocity * CGFloat(dt)
+
+        sprite.position += pointsToMoveInFrame
+        
+    }
+    
+
+    
     
     func boundsCheckZombie() {
             let bottomLeft = CGPoint(x: 0,
@@ -139,9 +172,18 @@ class GameScene: SKScene {
                 velocity.y = -velocity.y }
     }
     func rotateSprite(sprite: SKSpriteNode,
-                   direction: CGPoint){
-        sprite.zRotation = CGFloat(atan2(Double(direction.y),
-                                         Double(direction.x)))
+                   velocity: CGPoint,
+         rotateRadiansPerSec: CGFloat){
+            
+        let shortest = shortestAngleBetween(zombie.zRotation, velocity.angleRad)
+        
+        let amtToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
+            
+            
+        sprite.zRotation += amtToRotate * shortest.sign()
+
+        
+
     }
 }
 
