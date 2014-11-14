@@ -77,6 +77,7 @@ extension CGPoint {
     var angleRad: CGFloat {
         return atan2(y, x)
     }
+    
 }
 
 
@@ -107,5 +108,14 @@ func shortestAngleBetween(angle1: CGFloat, angle2: CGFloat) -> CGFloat {
 
 extension CGFloat {
     func sign() -> CGFloat {
-    return (self >= 0.0) ? 1.0 : -1.0 }
+    return (self >= 0.0) ? 1.0 : -1.0
+    }
+    
+    static func random() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UInt32.max))
+    }
+    static func random(#min: CGFloat, max: CGFloat) -> CGFloat {
+        assert(min < max)
+        return CGFloat.random() * (max - min) + min
+    }
 }

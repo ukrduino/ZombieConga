@@ -100,34 +100,22 @@ func shortestAngleBetween(angle1: CGFloat, angle2: CGFloat) -> CGFloat {
 
 extension CGFloat {
     func sign() -> CGFloat {
-        return (self >= 0.0) ? 1.0 : -1.0 }
-}
-
-extension CGFloat {
-    func degr() -> CGFloat {
-        return self * (180/CGFloat(M_PI))
+        return (self >= 0.0) ? 1.0 : -1.0
     }
-}
-
-extension CGFloat {
-    func rad() -> CGFloat {
-        return self * (CGFloat(M_PI)/180)
-    }
+    
+    static func random() -> CGFloat {        return CGFloat(Float(arc4random()) / Float(UInt32.max))    }    static func random(#min: CGFloat, max: CGFloat) -> CGFloat {        assert(min < max)        return CGFloat.random() * (max - min) + min    }
 }
 
 
 
-let testPoint1 = CGPoint(x: -7, y: -7)
-let testPoint2 = CGPoint(x: -7, y: 1)
-
-var ang1 = testPoint1.angleRad
-
-var ang2 = testPoint2.angleRad
+var testPoint1 = CGFloat.random(min: 10, max: 20)
+var testPoint2 = CGFloat.random()
 
 
-var shortestAngle = shortestAngleBetween(ang1, ang2)
 
-var shortestAngleDeg = shortestAngle.degr()
+
+
+
 
 
 

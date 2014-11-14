@@ -20,6 +20,7 @@ class GameScene: SKScene {
     let zombieMovePointsPerSec: CGFloat = 480.0
     let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
     let playableRect: CGRect
+    let zombieAnimation: SKAction
 
 
 // определение переменных
@@ -28,15 +29,31 @@ class GameScene: SKScene {
     var dt: NSTimeInterval = 0 // время с последнего обновления картинки в мс
     var lastTouchLocation = CGPointZero // вектор места последнего касания
 
+
     override init(size: CGSize) {
         let maxAspectRatio:CGFloat = 16.0/9.0 // максимальное соотношение сторон 1,77
         let playableHeight = size.width / maxAspectRatio // расчет высоты игровой области
         let playableMargin = (size.height-playableHeight)/2.0 // слепая зона игры
+        var textures:[SKTexture] = []
+        
         
         playableRect = CGRect(x: 0, // игровая зона гарантированно видимая на всех устройствах
                               y: playableMargin,
                           width: size.width,
                          height: playableHeight) // 4 
+        
+        for i in 1...4 {textures.append(SKTexture(imageNamed: "zombie\(i)"))
+        }
+        // 3
+        textures.append(textures[2])
+        textures.append(textures[1])
+        // 4
+        zombieAnimation = SKAction.repeatActionForever(
+            SKAction.animateWithTextures(textures, timePerFrame: 0.1))
+        
+        
+        
+        
         super.init(size: size) // 5
     }
     required init(coder aDecoder: NSCoder) {
@@ -69,6 +86,16 @@ class GameScene: SKScene {
     //zombie.setScale(2.0) // SKNode method - масштабирование зомби
         
     addChild(zombie) //добавление зомби к сцене
+    
+    runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnEnemy),
+                                                              SKAction.waitForDuration(2.0)])))
+
+    runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnCat),
+                                                              SKAction.waitForDuration(1.0)])))
+    
+//    zombie.runAction(SKAction.repeatActionForever(zombieAnimation))
+                                    
+                                    
     debugDrawPlayableArea() // рисование красного квадрата игровой зоны
     }
     
@@ -87,12 +114,12 @@ class GameScene: SKScene {
         let distanceToStop = (lastTouchLocation-zombie.position).length() //расстояние до остановки зомби
         if distanceToStop > 0 {
         
-        println("distanceToStop: \(distanceToStop)")
         }
         // если растояние до точки остановки зомби меньше растояния которое зомби должен пройти в этом кадре то зомби ставим в точку где он должен остановиться и устанавливаем вектор скорости  = 0
         if (distanceToStop<=(zombieMovePointsPerSec * CGFloat(dt))){
             zombie.position = lastTouchLocation
             velocity = CGPointZero
+            stopZombieAnimation()
         
         }
         // если нет то двигаем зомби и вращаем если нужно
@@ -103,6 +130,7 @@ class GameScene: SKScene {
         }
         
         boundsCheckZombie()
+        checkCollisions()
     }
    
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
@@ -128,13 +156,16 @@ class GameScene: SKScene {
    
     func moveZombieToward(location: CGPoint) {
         
+        
+        startZombieAnimation()
+        
         let offset = location - zombie.position // вектор растояния между ветором положения зомби и вектором координат прикосновения
-        println("offset: \(offset)")
+
         
         let direction = offset.normalized() // вектор направления - нормализованный ветор расстояния
 
         velocity = direction * zombieMovePointsPerSec //обновленный ветор скорости т.е. зомби идет на расстояние zombieMovePointsPerSec (за одну секунду) в напралении direction
-        println("velocity: \(velocity)")
+
     }    
     
     func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) { //принимает параметры (спрайт, вектор скорости)
@@ -185,6 +216,108 @@ class GameScene: SKScene {
         
 
     }
+    
+    func spawnEnemy() {
+        
+        let enemy = SKSpriteNode(imageNamed: "enemy")
+        
+        enemy.name = "enemy"
+        
+        enemy.position = CGPoint(x: size.width + enemy.size.width/2,
+                                 y: CGFloat.random(
+                               min: CGRectGetMinY(playableRect) + enemy.size.height/2,
+                               max: CGRectGetMaxY(playableRect) - enemy.size.height/2))
+        
+        addChild(enemy)
+        
+        let actionMove = SKAction.moveToX(-enemy.size.width/2, duration: 2.0)
+        let actionRemove = SKAction.removeFromParent()
+        enemy.runAction(SKAction.sequence([actionMove, actionRemove]))
+    }
+    
+    func startZombieAnimation() {
+        if zombie.actionForKey("animation") == nil {
+        zombie.runAction(
+        SKAction.repeatActionForever(zombieAnimation),
+        withKey: "animation")
+        }
+    }
+    func stopZombieAnimation() {
+        zombie.removeActionForKey("animation")
+    }
+    
+    func spawnCat() {
+     
+            let cat = SKSpriteNode(imageNamed: "cat")
+            
+            cat.name = "cat"
+            
+            cat.position = CGPoint(x: CGFloat.random(min: CGRectGetMinX(playableRect),
+                                                     max: CGRectGetMaxX(playableRect)),
+            
+                                   y: CGFloat.random(min: CGRectGetMinY(playableRect),
+                                                     max: CGRectGetMaxY(playableRect)))
+            cat.setScale(0)
+            addChild(cat)
+     
+            let appear = SKAction.scaleTo(1.0, duration: 0.5)
+        
+            cat.zRotation = -π / 16.0
+            let leftWiggle = SKAction.rotateByAngle(π/8.0, duration: 0.5)
+            let rightWiggle = leftWiggle.reversedAction()
+            let fullWiggle = SKAction.sequence([leftWiggle, rightWiggle])
+        
+            let scaleUp = SKAction.scaleBy(1.2, duration: 0.25)
+            let scaleDown = scaleUp.reversedAction()
+            let fullScale = SKAction.sequence(
+                [scaleUp, scaleDown, scaleUp, scaleDown])
+            let group = SKAction.group([fullScale, fullWiggle])
+            let groupWait = SKAction.repeatAction(group, count: 10)
+
+            let disappear = SKAction.scaleTo(0, duration: 0.5)
+            let removeFromParent = SKAction.removeFromParent()
+            let actions = [appear, groupWait, disappear, removeFromParent]
+            cat.runAction(SKAction.sequence(actions))
+    }
+    
+    func zombieHitCat(cat: SKSpriteNode) {
+            cat.removeFromParent()
+            println("cat.removeFromParent: \(cat)")
+    }
+    
+    func zombieHitEnemy(enemy: SKSpriteNode) {
+            enemy.removeFromParent()
+            println("enemy.removeFromParent: \(enemy)")
+    }
+    func checkCollisions() {
+            
+            var hitCats: [SKSpriteNode] = []
+            
+            enumerateChildNodesWithName("cat") { node, _ in
+                let cat = node as SKSpriteNode
+                if CGRectIntersectsRect(cat.frame, self.zombie.frame) {
+                    hitCats.append(cat)
+                    println("chitCats.append: \(cat)")
+                }
+            }
+            for cat in hitCats {
+                zombieHitCat(cat)
+            }
+            
+            var hitEnemies: [SKSpriteNode] = []
+            
+            enumerateChildNodesWithName("enemy") { node, _ in
+                let enemy = node as SKSpriteNode
+                if CGRectIntersectsRect(CGRectInset(node.frame, 20, 20), self.zombie.frame) {
+                    hitEnemies.append(enemy)
+                    println("hitEnemies.append: \(enemy)")
+                }
+            }
+            for enemy in hitEnemies {
+                zombieHitEnemy(enemy)
+            }
+    }
+    
 }
 
 
