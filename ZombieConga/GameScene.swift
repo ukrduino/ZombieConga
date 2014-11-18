@@ -76,27 +76,28 @@ class GameScene: SKScene {
         let background = SKSpriteNode(imageNamed: "background1") // определение фона
         background.zPosition = -1 // фон -  самый первый слой
         addChild(background) // добавлени фона к сцене
-//        background.position = CGPoint(x: size.width/2, y: size.height/2) // установка центра фона в центр экрана
         background.anchorPoint = CGPointZero // якорь фона нижний левый угол
         background.position = CGPointZero // совмещение нижнего левого угла фона с нижним левым углом экрана
         let mySize = background.size // размер фона
+
 //    println("Size: \(mySize)")
 
     zombie.position = CGPoint(x: 400, y: 400) // установка зомби в начале игры
-    //zombie.setScale(2.0) // SKNode method - масштабирование зомби
+
         
     addChild(zombie) //добавление зомби к сцене
     
+// spawnEnemy
     runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnEnemy),
                                                               SKAction.waitForDuration(2.0)])))
-
+// spawnCat
     runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnCat),
                                                               SKAction.waitForDuration(1.0)])))
     
-//    zombie.runAction(SKAction.repeatActionForever(zombieAnimation))
-                                    
+        
                                     
     debugDrawPlayableArea() // рисование красного квадрата игровой зоны
+        
     }
     
     override func update(currentTime: NSTimeInterval){ //функция обновлени кадров в игре
@@ -130,7 +131,7 @@ class GameScene: SKScene {
         }
         
         boundsCheckZombie()
-        checkCollisions()
+
     }
    
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
@@ -203,7 +204,7 @@ class GameScene: SKScene {
                 velocity.y = -velocity.y }
     }
     func rotateSprite(sprite: SKSpriteNode,
-                   velocity: CGPoint,
+                    velocity: CGPoint,
          rotateRadiansPerSec: CGFloat){
             
         let shortest = shortestAngleBetween(zombie.zRotation, velocity.angleRad)
@@ -217,16 +218,19 @@ class GameScene: SKScene {
 
     }
     
+////  Chapter 3: Actions
+    
+    
     func spawnEnemy() {
         
         let enemy = SKSpriteNode(imageNamed: "enemy")
         
         enemy.name = "enemy"
-        
+
+// You create a sprite and position it at the randome vertical position of the screen, just out of view to the right.
         enemy.position = CGPoint(x: size.width + enemy.size.width/2,
-                                 y: CGFloat.random(
-                               min: CGRectGetMinY(playableRect) + enemy.size.height/2,
-                               max: CGRectGetMaxY(playableRect) - enemy.size.height/2))
+                                 y: CGFloat.random(min: CGRectGetMinY(playableRect) + enemy.size.height/2,
+                                                   max: CGRectGetMaxY(playableRect) - enemy.size.height/2))
         
         addChild(enemy)
         
@@ -237,9 +241,7 @@ class GameScene: SKScene {
     
     func startZombieAnimation() {
         if zombie.actionForKey("animation") == nil {
-        zombie.runAction(
-        SKAction.repeatActionForever(zombieAnimation),
-        withKey: "animation")
+        zombie.runAction(SKAction.repeatActionForever(zombieAnimation), withKey: "animation")
         }
     }
     func stopZombieAnimation() {
@@ -282,17 +284,20 @@ class GameScene: SKScene {
     
     func zombieHitCat(cat: SKSpriteNode) {
             cat.removeFromParent()
-            println("cat.removeFromParent: \(cat)")
+            runAction(catCollisionSound)
+            println("cat.removeFromParent")
     }
     
     func zombieHitEnemy(enemy: SKSpriteNode) {
             enemy.removeFromParent()
-            println("enemy.removeFromParent: \(enemy)")
+            runAction(enemyCollisionSound)
+            println("enemy.removeFromParent")
     }
     func checkCollisions() {
             
             var hitCats: [SKSpriteNode] = []
-            
+        
+//НЕПОНЯТНАЯ ТЕМА с enumerateChildNodesWithName !!!!!!!!
             enumerateChildNodesWithName("cat") { node, _ in
                 let cat = node as SKSpriteNode
                 if CGRectIntersectsRect(cat.frame, self.zombie.frame) {
@@ -317,6 +322,17 @@ class GameScene: SKScene {
                 zombieHitEnemy(enemy)
             }
     }
+   
+////    The Sprite Kit game loop, round 2
+    
+    override func didEvaluateActions() {
+        checkCollisions()
+    }
+    
+    let catCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
+    let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
+    
+    
     
 }
 

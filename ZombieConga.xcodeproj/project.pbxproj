@@ -16,6 +16,11 @@
 		A53CD5471A076F8500A77E57 /* ZombieCongaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53CD5461A076F8500A77E57 /* ZombieCongaTests.swift */; };
 		A593AD0B1A0D0B8A00F52AA3 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */; };
 		A593AD0D1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A593AD0C1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf */; };
+		A5B35EA01A1B503F00AC7661 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5B35E9B1A1B503F00AC7661 /* backgroundMusic.mp3 */; };
+		A5B35EA11A1B503F00AC7661 /* hitCat.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5B35E9C1A1B503F00AC7661 /* hitCat.wav */; };
+		A5B35EA21A1B503F00AC7661 /* hitCatLady.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5B35E9D1A1B503F00AC7661 /* hitCatLady.wav */; };
+		A5B35EA31A1B503F00AC7661 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5B35E9E1A1B503F00AC7661 /* lose.wav */; };
+		A5B35EA41A1B503F00AC7661 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5B35E9F1A1B503F00AC7661 /* win.wav */; };
 		A5BE57C91A07BAD10030F2EA /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C31A07BAD10030F2EA /* background1.png */; };
 		A5BE57CA1A07BAD10030F2EA /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C41A07BAD10030F2EA /* background2.png */; };
 		A5BE57CB1A07BAD10030F2EA /* MainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE57C51A07BAD10030F2EA /* MainMenu.png */; };
@@ -49,6 +54,11 @@
 		A53CD5461A076F8500A77E57 /* ZombieCongaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCongaTests.swift; sourceTree = "<group>"; };
 		A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		A593AD0C1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Линейная алгебра для разработчиков игр _ Хабрахабр.pdf"; sourceTree = "<group>"; };
+		A5B35E9B1A1B503F00AC7661 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		A5B35E9C1A1B503F00AC7661 /* hitCat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCat.wav; sourceTree = "<group>"; };
+		A5B35E9D1A1B503F00AC7661 /* hitCatLady.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCatLady.wav; sourceTree = "<group>"; };
+		A5B35E9E1A1B503F00AC7661 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
+		A5B35E9F1A1B503F00AC7661 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
 		A5BE57C31A07BAD10030F2EA /* background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background1.png; sourceTree = "<group>"; };
 		A5BE57C41A07BAD10030F2EA /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background2.png; sourceTree = "<group>"; };
 		A5BE57C51A07BAD10030F2EA /* MainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainMenu.png; sourceTree = "<group>"; };
@@ -99,6 +109,7 @@
 		A53CD5291A076F8500A77E57 /* ZombieConga */ = {
 			isa = PBXGroup;
 			children = (
+				A5B35E9A1A1B503F00AC7661 /* Sounds */,
 				A5BE57C21A07BAD10030F2EA /* Images */,
 				A5BE57C81A07BAD10030F2EA /* sprites.atlas */,
 				A53CD52C1A076F8500A77E57 /* AppDelegate.swift */,
@@ -138,6 +149,18 @@
 				A53CD5451A076F8500A77E57 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5B35E9A1A1B503F00AC7661 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				A5B35E9B1A1B503F00AC7661 /* backgroundMusic.mp3 */,
+				A5B35E9C1A1B503F00AC7661 /* hitCat.wav */,
+				A5B35E9D1A1B503F00AC7661 /* hitCatLady.wav */,
+				A5B35E9E1A1B503F00AC7661 /* lose.wav */,
+				A5B35E9F1A1B503F00AC7661 /* win.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		A5BE57C21A07BAD10030F2EA /* Images */ = {
@@ -232,9 +255,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5B35EA31A1B503F00AC7661 /* lose.wav in Resources */,
+				A5B35EA41A1B503F00AC7661 /* win.wav in Resources */,
 				A5BE57CD1A07BAD10030F2EA /* YouWin.png in Resources */,
 				A5BE57CE1A07BAD10030F2EA /* sprites.atlas in Resources */,
+				A5B35EA01A1B503F00AC7661 /* backgroundMusic.mp3 in Resources */,
+				A5B35EA11A1B503F00AC7661 /* hitCat.wav in Resources */,
 				A53CD53B1A076F8500A77E57 /* LaunchScreen.xib in Resources */,
+				A5B35EA21A1B503F00AC7661 /* hitCatLady.wav in Resources */,
 				A593AD0D1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf in Resources */,
 				A5BE57CB1A07BAD10030F2EA /* MainMenu.png in Resources */,
 				A5BE57CC1A07BAD10030F2EA /* YouLose.png in Resources */,
