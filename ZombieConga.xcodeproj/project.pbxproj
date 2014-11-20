@@ -14,6 +14,7 @@
 		A53CD5381A076F8500A77E57 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53CD5371A076F8500A77E57 /* Images.xcassets */; };
 		A53CD53B1A076F8500A77E57 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A53CD5391A076F8500A77E57 /* LaunchScreen.xib */; };
 		A53CD5471A076F8500A77E57 /* ZombieCongaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53CD5461A076F8500A77E57 /* ZombieCongaTests.swift */; };
+		A553A3D01A1DF53300F684E5 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A553A3CF1A1DF53300F684E5 /* MainMenuScene.swift */; };
 		A55BD8C41A1CC5B100F92ED4 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55BD8C31A1CC5B100F92ED4 /* GameOverScene.swift */; };
 		A593AD0B1A0D0B8A00F52AA3 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */; };
 		A593AD0D1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A593AD0C1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf */; };
@@ -54,6 +55,7 @@
 		A53CD5401A076F8500A77E57 /* ZombieCongaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZombieCongaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53CD5451A076F8500A77E57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A53CD5461A076F8500A77E57 /* ZombieCongaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieCongaTests.swift; sourceTree = "<group>"; };
+		A553A3CF1A1DF53300F684E5 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		A55BD8C31A1CC5B100F92ED4 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		A593AD0C1A0D15B200F52AA3 /* Линейная алгебра для разработчиков игр _ Хабрахабр.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Линейная алгебра для разработчиков игр _ Хабрахабр.pdf"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				A5BE57C81A07BAD10030F2EA /* sprites.atlas */,
 				A53CD52C1A076F8500A77E57 /* AppDelegate.swift */,
 				A53CD5301A076F8500A77E57 /* GameScene.swift */,
+				A553A3CF1A1DF53300F684E5 /* MainMenuScene.swift */,
 				A55BD8C31A1CC5B100F92ED4 /* GameOverScene.swift */,
 				A593AD0A1A0D0B8A00F52AA3 /* MyUtils.swift */,
 				A53CD5321A076F8500A77E57 /* GameViewController.swift */,
@@ -299,6 +302,7 @@
 				A53CD52D1A076F8500A77E57 /* AppDelegate.swift in Sources */,
 				A5B35EA61A1B980F00AC7661 /* ActionsCatalog.txt in Sources */,
 				A55BD8C41A1CC5B100F92ED4 /* GameOverScene.swift in Sources */,
+				A553A3D01A1DF53300F684E5 /* MainMenuScene.swift in Sources */,
 				A593AD0B1A0D0B8A00F52AA3 /* MyUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
